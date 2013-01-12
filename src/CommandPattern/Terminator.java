@@ -2,20 +2,16 @@ package CommandPattern;
 
 import java.util.Vector;
 
-public class Terminator implements KillingMashines
+public abstract class Terminator implements KillingMashines
 {
 	private Vector<Befehl> log = new Vector<Befehl>();
 	private Vector<Befehl> Befehlsliste = new Vector<Befehl>();
 	
+	
 	public Terminator()
 	{
-		Befehlsliste.add(new KillSarahConnor());
 		
-		Befehlsliste.add(new KillJohnConnor());
 		
-		Befehlsliste.add(new KillKateBrewster());
-		
-		this.runAmok();
 	}
 	
 	public void setCommand(Vector<Befehl> commandList) 
@@ -25,17 +21,22 @@ public class Terminator implements KillingMashines
 		
 	}
 
+	abstract public int GetBuildCosts(); //Jeder der ableitet muss diese Funktion implementieren
+	abstract public int GetChanceToHit();
+	
 	@Override
 	public void runAmok() 
 	{
 		for(Befehl command : Befehlsliste) 
 		{			
-			command.execute();
+			command.execute(GetChanceToHit());
 			log.add(command);
 			
 		}
 		
 	}
+	
+	@Override
 	public void RepairMode()
 	{
 		for(Befehl command : log)
@@ -43,5 +44,7 @@ public class Terminator implements KillingMashines
 			command.undo();
 		}
 		log = new Vector<Befehl>();
+		
+		//System.out.println("Result: "+ SarahConnor.getLiveStatus());
 	}
 }

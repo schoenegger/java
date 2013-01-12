@@ -2,29 +2,37 @@ package CommandPattern;
 
 public class KillJohnConnor implements Befehl
 {
-	private JohnConnor john;
+	
+	
+	private static JohnConnor john;
 	/**
 	 * @param args
 	 */
 	public KillJohnConnor()
 	{
-		john = new JohnConnor(true);
+		john = (JohnConnor) JohnConnor.GetInstance();
 		
 	}
-
-	private void KillJohnConnorWithHeadshot()
+	
+	private void KillJohnConnorWithHeadshot(int chance)
 	{
-		john.SetLive(false);
+		int random =(int)(Math.random() * 100);
+		System.out.println("John hit: " + random + " chance: " + chance);	
+			if(random < chance)
+			{
+				john.SetLiveStatus(false);
+			}
 	}
+	
 	private void RepairJohnConnor()
 	{
-		john.SetLive(true);
+		john.SetLiveStatus(true);
 	}
 	
 	@Override
-	public void execute() 
+	public void execute(int chance) 
 	{
-		KillJohnConnorWithHeadshot();
+		KillJohnConnorWithHeadshot(chance);
 		
 	}
 
@@ -34,5 +42,6 @@ public class KillJohnConnor implements Befehl
 		RepairJohnConnor();
 		
 	}	
+
 
 }

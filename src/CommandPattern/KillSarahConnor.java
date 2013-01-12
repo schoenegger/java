@@ -1,6 +1,6 @@
 package CommandPattern;
 
-public class KillSarahConnor implements Befehl
+public class KillSarahConnor implements Befehl //Befehl = Interface
 {
 	private SarahConnor sarah ;
 	/**
@@ -8,22 +8,30 @@ public class KillSarahConnor implements Befehl
 	 */
 	public KillSarahConnor()
 	{
-		sarah = new SarahConnor(true);
-		
+		sarah = (SarahConnor) SarahConnor.GetInstance();
+		//Erzeugt einmaliges Sarah Connor objekt
 	}
 
-	private void KillSarahConnorWithHeadshot()
+	private void KillSarahConnorWithHeadshot(int chance)
 	{
-		sarah.SetLive(false);
+		int random =(int)(Math.random() * 100);
+		System.out.println("Sara hit: " + random + " chance: " + chance);	
+		if(random < chance)
+		{
+			sarah.SetLiveStatus(false);
+		}
+		
 	}
+	
 	private void RepairSarahConnor()
 	{
-		sarah.SetLive(true);
+		sarah.SetLiveStatus(false);
 	}
+	
 	@Override
-	public void execute() 
+	public void execute(int chance) 
 	{
-		KillSarahConnorWithHeadshot();
+		KillSarahConnorWithHeadshot(chance);
 		
 	}
 

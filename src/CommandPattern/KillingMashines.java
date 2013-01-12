@@ -6,5 +6,6 @@ public interface KillingMashines
 {
 	
 public void runAmok();
+public void RepairMode();
 
 }

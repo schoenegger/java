@@ -1,27 +1,47 @@
 package CommandPattern;
 
-public class JohnConnor 
+public class JohnConnor extends Person
 {
-	private boolean isAlive;
-	private boolean hasHead = true;
-	private boolean hasSunglasses = false;
+	private static Person JohnInstance;
+	
+	public JohnConnor()
+	{
+		
+	}
+	
+	public static Person GetInstance()
+	{
+		if(JohnInstance == null) 
+		{
+			JohnInstance = new JohnConnor();
+		}
+		
+		return JohnInstance;
+		
+	}
 
-	public JohnConnor(boolean isAlive)
-	{
-		this.isAlive = isAlive;
+	@Override
+	public void SetLiveStatus(boolean live) {
+		JohnInstance.isAlive = live;
+		
 	}
-	public void SetLive(boolean setLive)
-	{
-		if(setLive == false)
-		{
-			isAlive = false;
-			System.out.println("John Connor is Dead");
-		}
-		else
-		{
-			isAlive = true;
-			System.out.println("John Connor is Alive");
-			
-		}
+
+	@Override
+	public boolean GetLiveStatus() {
+		return JohnInstance.isAlive;
 	}
+
+	@Override
+	public void SetSunnGlasses(boolean sunnG) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean GetSunnGlassStatus() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+		
+	
 }

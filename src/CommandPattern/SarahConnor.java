@@ -1,27 +1,55 @@
 package CommandPattern;
 
-public class SarahConnor 
+public class SarahConnor extends Person //erbt von Abstrakter klasse
 {
-	private boolean isAlive;
-	private boolean hasHead = true;
-	private boolean hasSunglasses = false;
-
-	public SarahConnor(boolean isAlive)
+	private static Person SaraInstance;
+	
+	public SarahConnor()
 	{
-		this.isAlive = isAlive;
+		//Konstruktor
 	}
-	public void SetLive(boolean setLive)
+		
+	
+	
+	public static Person GetInstance()
+	//Diese Funktions erzeugt SarahConnor Objekt--einmalig
 	{
-		if(setLive == false)
+		if(SaraInstance == null) 
 		{
-			isAlive = false;
-			System.out.println("SarahConnor is Dead");
+			SaraInstance = new SarahConnor();
 		}
-		else
-		{
-			isAlive = true;
-			System.out.println("SarahConnor is Alive");
-			
-		}
+		
+		return SaraInstance;
+		
+	}
+
+
+	@Override
+	public void SetLiveStatus(boolean live) 
+	{
+		SaraInstance.isAlive = live;
+	}
+
+
+
+	@Override
+	public boolean GetLiveStatus() 
+	{
+		return SaraInstance.isAlive;
+	}
+
+
+	@Override
+	public void SetSunnGlasses(boolean sunnG) 
+	{
+		SaraInstance.hasSunglasses = sunnG;
+	}
+
+
+
+	@Override
+	public boolean GetSunnGlassStatus() 
+	{
+		return SaraInstance.hasSunglasses;
 	}
 }

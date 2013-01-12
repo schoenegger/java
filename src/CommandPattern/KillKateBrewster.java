@@ -6,25 +6,31 @@ public class KillKateBrewster implements Befehl
 	/**
 	 * @param args
 	 */
-	public KillKateBrewster ()
+	public KillKateBrewster()
 	{
-		kate = new KateBrewster(true);
+		kate = (KateBrewster) KateBrewster.GetInstance();
 		
 	}
-
-	private void KillKateBrewsterWithHeadshot()
+	
+	private void KillKateBrewsterWithHeadshot(int chance)
 	{
-		kate.SetLive(false);
+		int random =(int)(Math.random() * 100);
+		System.out.println("Kate hit: " + random + " chance: " + chance);	
+		if(random < chance)
+		{
+			kate.SetLiveStatus(false);
+		}
 	}
+	
 	private void RepairKillKateBrewster()
 	{
-		kate.SetLive(true);
+		kate.SetLiveStatus(true);
 	}
 	
 	@Override
-	public void execute() 
+	public void execute(int chance) 
 	{
-		KillKateBrewsterWithHeadshot();
+		KillKateBrewsterWithHeadshot(chance);
 		
 	}
 
@@ -34,7 +40,5 @@ public class KillKateBrewster implements Befehl
 		RepairKillKateBrewster();
 		
 	}	
-
-	
 
 }

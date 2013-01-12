@@ -1,27 +1,45 @@
 package CommandPattern;
 
-public class KateBrewster 
+public class KateBrewster extends Person
 {
-	private boolean isAlive;
-	private boolean hasHead = true;
-	private boolean hasSunglasses = false;
-
-	public KateBrewster(boolean isAlive)
+	private static KateBrewster KateInstance;
+	
+	public KateBrewster()
 	{
-		this.isAlive = isAlive;
+		
 	}
-	public void SetLive(boolean setLive)
+	
+	public static Person GetInstance()
 	{
-		if(setLive == false)
+		if(KateInstance == null) 
 		{
-			isAlive = false;
-			System.out.println("Kate Brewster is Dead");
+			KateInstance = new KateBrewster();
 		}
-		else
-		{
-			isAlive = true;
-			System.out.println("Kate Brewster is Alive");
-			
-		}
+		
+		return KateInstance;
+		
+	}
+
+	@Override
+	public void SetLiveStatus(boolean live) {
+		KateInstance.isAlive = live;
+		
+	}
+
+	@Override
+	public boolean GetLiveStatus() {
+		return KateInstance.isAlive;
+	}
+
+	@Override
+	public void SetSunnGlasses(boolean sunnG) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean GetSunnGlassStatus() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }
